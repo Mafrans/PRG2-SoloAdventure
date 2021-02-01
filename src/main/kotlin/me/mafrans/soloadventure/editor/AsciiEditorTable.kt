@@ -3,14 +3,15 @@ package me.mafrans.soloadventure.editor
 import javax.swing.JTable
 import javax.swing.table.DefaultTableModel
 
-class AsciiEditorTable : JTable() {
-    fun setCellGridSize(width: Int, height: Int) {
+class AsciiEditorTable(val columns: Int, val rows: Int) : JTable() {
+    init {
         val model = DefaultTableModel()
-        for (y in 0 until height) {
-            model.addRow(emptyArray())
-            for (i in 0 until width) {
-                model.addColumn("");
-            }
+        for (y in 0 until columns) {
+            model.addRow(arrayOfNulls<String>(0))
         }
+        for (x in 0 until rows) {
+            model.addColumn("")
+        }
+        this.model = model;
     }
 }
