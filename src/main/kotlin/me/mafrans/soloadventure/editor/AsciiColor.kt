@@ -28,6 +28,10 @@ enum class AsciiColor(val ansiColor: Ansi.Color, val color: Color, val bright: B
         fun from(color: Color): AsciiColor? {
             return values().find { it.color == color }
         }
+
+        fun fromAnsi(ansiColor: Int): AsciiColor? {
+            return values().find { it.fg() == ansiColor }
+        }
     }
 
     fun fg(): Int {
