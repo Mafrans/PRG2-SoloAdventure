@@ -13,6 +13,17 @@ class ImagePreviewPanel(val image: DBImage) : JPanel() {
                 val cellHeight = height / image.cells[0].size
                 val cellX = x * cellWidth
                 val cellY = y * cellHeight
+
+                val background = AsciiColor.fromAnsi(cell.style.background);
+                val foreground = AsciiColor.fromAnsi(cell.style.foreground);
+                if (background != null) {
+                    g?.color = background.color
+                    g?.fillRect(cellX, cellY, cellWidth, cellHeight);
+                }
+                if (foreground != null && cell.text != null) {
+                    g?.color = foreground.color
+                    g?.drawString(cell.text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
+                }
             }
         }
     }
