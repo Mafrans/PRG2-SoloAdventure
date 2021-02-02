@@ -43,9 +43,9 @@ class AsciiEditorPainter(val table: AsciiEditorTable) : JPanel() {
 
     override fun paint(g: Graphics?) {
         for (x in colors.indices) {
-            for (y in colors[0].indices) {
+            for (y in colors[x].indices) {
                 val cellWidth = width / colors.size
-                val cellHeight = height / colors[0].size
+                val cellHeight = height / colors[x].size
                 val cellX = x * cellWidth
                 val cellY = y * cellHeight
 
