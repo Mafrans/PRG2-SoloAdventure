@@ -9,6 +9,8 @@ public class ImageEditor {
     private JPanel colorPickerWrapper;
     private JRadioButton foregroundRadioButton;
     private JRadioButton backgroundRadioButton;
+    private JButton saveButton;
+    private JButton cancelButton;
 
     public AsciiEditorPainter asciiEditorPainter;
 
