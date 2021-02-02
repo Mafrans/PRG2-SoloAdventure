@@ -46,17 +46,17 @@ class AsciiEditorPainter(val table: AsciiEditorTable) : JPanel() {
 
                 val saturation = (g?.color!!.red + g.color!!.green + g.color!!.blue) / (3.0 * 256)
                 println(saturation)
-                g?.color = Color.BLACK
+                g.color = Color.BLACK
                 if (saturation < 0.5)
-                    g?.color = Color.WHITE
+                    g.color = Color.WHITE
 
                 val text: String? = table.model.getValueAt(y, x) as String?
                 if (text != null) {
-                    g?.drawString(text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
+                    g.drawString(text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
                 }
 
-                g?.color = Color.BLACK
-                g?.drawRect(cellX, cellY, cellWidth, cellHeight)
+                g.color = Color.BLACK
+                g.drawRect(cellX, cellY, cellWidth, cellHeight)
             }
         }
     }
