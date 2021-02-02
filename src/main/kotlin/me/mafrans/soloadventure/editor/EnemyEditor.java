@@ -7,9 +7,12 @@ public class EnemyEditor {
     private JSpinner hpSpinner;
     private JButton editSpriteButton;
     private JPanel mainPanel;
-    private JPanel spritePanel;
+    private JPanel spritePanelWrapper;
+
+    public ImagePreviewPanel spritePanel;
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        spritePanel = new ImagePreviewPanel(null);
+        spritePanelWrapper.add(spritePanel);
     }
 }

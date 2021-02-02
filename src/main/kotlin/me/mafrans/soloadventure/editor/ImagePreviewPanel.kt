@@ -4,8 +4,10 @@ import me.mafrans.soloadventure.models.DBImage
 import java.awt.Graphics
 import javax.swing.JPanel
 
-class ImagePreviewPanel(val image: DBImage) : JPanel() {
+class ImagePreviewPanel(val image: DBImage?) : JPanel() {
     override fun paint(g: Graphics?) {
+        if (image == null) return;
+
         for (x in image.cells.indices) {
             for (y in image.cells[x].indices) {
                 val cell = image.cells[x][y]
