@@ -29,12 +29,13 @@ public class EnemyEditor {
         frame.setVisible(true);
 
         editSpriteButton.addActionListener(e -> {
-            ImageEditor imageEditor = new ImageEditor(enemy.sprite);
+            ImageEditor imageEditor = new ImageEditor(this.enemy.sprite);
         });
     }
 
     private void createUIComponents() {
         spritePanel = new ImagePreviewPanel(null);
+        spritePanelWrapper = new JPanel();
         spritePanelWrapper.add(spritePanel);
     }
 }
