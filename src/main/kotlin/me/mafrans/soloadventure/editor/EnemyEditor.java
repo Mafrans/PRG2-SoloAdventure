@@ -22,6 +22,12 @@ public class EnemyEditor {
             this.enemy = new DBEnemy(nameField.getText(), (int) hpSpinner.getValue());
         }
 
+        JFrame frame = new JFrame("EnemyEditor");
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
         editSpriteButton.addActionListener(e -> {
             ImageEditor imageEditor = new ImageEditor(enemy.sprite);
         });
