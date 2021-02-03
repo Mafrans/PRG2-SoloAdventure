@@ -13,6 +13,7 @@ public class EnemyEditor {
     private JButton editSpriteButton;
     private JPanel mainPanel;
     private JPanel spritePanelWrapper;
+    private JButton saveButton;
 
     public ImagePreviewPanel spritePanel;
     public DBEnemy enemy;
@@ -36,6 +37,10 @@ public class EnemyEditor {
                 spritePanel.setImage(imageEditor.image);
                 spritePanel.repaint();
             });
+        });
+
+        saveButton.addActionListener(e -> {
+            this.enemy.save();
         });
     }
 
