@@ -13,7 +13,6 @@ public class ImageEditor {
     private JRadioButton foregroundRadioButton;
     private JRadioButton backgroundRadioButton;
     private JButton saveButton;
-    private JButton cancelButton;
 
     public AsciiEditorPainter asciiEditorPainter;
     public DBImage image;
@@ -40,7 +39,7 @@ public class ImageEditor {
 
         JFrame frame = new JFrame("ImageEditor");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
