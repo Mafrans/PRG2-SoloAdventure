@@ -1,14 +1,12 @@
 package me.mafrans.soloadventure.editor
 
+import me.mafrans.soloadventure.models.DBImage
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
-import java.awt.event.MouseListener
 import javax.swing.JPanel
-import javax.swing.event.TableModelEvent
-import javax.swing.event.TableModelListener
 
 class CellColor(var background: AsciiColor?, var foreground: AsciiColor?)
 
@@ -39,6 +37,21 @@ class AsciiEditorPainter(val table: AsciiEditorTable) : JPanel() {
         })
 
         table.model.addTableModelListener { repaint() }
+    }
+
+    fun load(image: DBImage?) {
+        if (image == null)
+            return
+
+        for (x in image.cells.indices) {
+            for (y in image.cells[x].indices) {
+                val cell = image.cells[x][y]
+                val background = AsciiColor.fromAnsi(cell.style.background)
+                val foreground = AsciiColor.fromAnsi(cell.style.foreground)
+                colors[x][y] = CellColor(background, foreground)
+            }
+        }
+        repaint()
     }
 
     override fun paint(g: Graphics?) {

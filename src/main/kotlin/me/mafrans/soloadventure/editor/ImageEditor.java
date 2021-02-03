@@ -1,5 +1,8 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.models.DBImage;
+import me.mafrans.soloadventure.models.DBImageCell;
+
 import javax.swing.*;
 
 public class ImageEditor {
@@ -13,19 +16,27 @@ public class ImageEditor {
     private JButton cancelButton;
 
     public AsciiEditorPainter asciiEditorPainter;
+    public DBImage image;
 
     private void createUIComponents() {
         asciiEditorTable = new AsciiEditorTable(10, 10);
+        asciiEditorTable.load(image);
 
         asciiEditorPainter = new AsciiEditorPainter(asciiEditorTable);
         asciiEditorPainterWrapper = new JPanel();
         asciiEditorPainterWrapper.add(asciiEditorPainter);
+        asciiEditorPainter.load(image);
 
         colorPickerWrapper = new JPanel();
         colorPickerWrapper.add(new ColorPickerPanel(asciiEditorPainter, AsciiColor.values()));
     }
 
-    public ImageEditor() {
+    public ImageEditor(DBImage image) {
+        this.image = image;
+        if(image == null) {
+            this.image = new DBImage(new DBImageCell[24][16]);
+        }
+
         JFrame frame = new JFrame("ImageEditor");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
