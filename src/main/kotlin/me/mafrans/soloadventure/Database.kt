@@ -3,6 +3,7 @@ package me.mafrans.soloadventure
 import com.mongodb.client.MongoClients
 import dev.morphia.Datastore
 import dev.morphia.Morphia
+import dev.morphia.query.UpdateException
 import dev.morphia.query.experimental.filters.Filters
 import me.mafrans.soloadventure.models.DBEnemy
 import me.mafrans.soloadventure.models.DBImage
@@ -18,7 +19,11 @@ class Database {
         val db = Database()
 
         fun <T> save(entity: T) {
-            db.datastore.save(entity);
+            db.datastore.save(entity)
+            try {
+                db.datastore.merge(entity)
+            }
+            catch (e: UpdateException) {}
         }
     }
 

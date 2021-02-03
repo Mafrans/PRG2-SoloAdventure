@@ -34,7 +34,7 @@ public class ImageEditor {
     public ImageEditor(DBImage image) {
         this.image = image;
         if(image == null) {
-            this.image = new DBImage(new DBImageCell[24][16]);
+            this.image = new DBImage();
         }
 
         JFrame frame = new JFrame("ImageEditor");

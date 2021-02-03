@@ -1,5 +1,6 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.Database;
 import me.mafrans.soloadventure.models.DBEnemy;
 
 import javax.swing.*;
@@ -40,6 +41,8 @@ public class EnemyEditor {
         });
 
         saveButton.addActionListener(e -> {
+            this.enemy.name = nameField.getText();
+            this.enemy.hp = (int) hpSpinner.getValue();
             this.enemy.save();
         });
     }
