@@ -3,6 +3,7 @@ package me.mafrans.soloadventure.models;
 import me.mafrans.soloadventure.Database;
 
 public class DBImage {
+    public String name;
     public DBImageCell[][] cells;
 
     public DBImage(DBImageCell[][] cells) {
