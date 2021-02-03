@@ -16,6 +16,10 @@ class Database {
 
     companion object {
         val db = Database()
+
+        fun <T> save(entity: T) {
+            db.datastore.save(entity);
+        }
     }
 
     class Images {

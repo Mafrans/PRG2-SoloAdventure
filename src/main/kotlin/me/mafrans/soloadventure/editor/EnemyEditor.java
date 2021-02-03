@@ -30,6 +30,9 @@ public class EnemyEditor {
 
         editSpriteButton.addActionListener(e -> {
             ImageEditor imageEditor = new ImageEditor(this.enemy.sprite);
+            imageEditor.onSave(() -> {
+                spritePanel.setImage(imageEditor.image);
+            });
         });
     }
 

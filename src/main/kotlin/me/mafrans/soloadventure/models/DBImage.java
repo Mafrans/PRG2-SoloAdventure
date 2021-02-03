@@ -13,4 +13,8 @@ public class DBImage {
     public static DBImage find(String name) {
         return Database.Images.Companion.findImage(name);
     }
+
+    public void save() {
+        Database.Companion.save(this);
+    }
 }

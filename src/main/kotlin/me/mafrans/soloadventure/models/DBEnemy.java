@@ -21,4 +21,8 @@ public class DBEnemy {
     public static DBEnemy find(String name) {
         return Database.Enemies.Companion.findEnemy(name);
     }
+
+    public void save() {
+        Database.Companion.save(this);
+    }
 }

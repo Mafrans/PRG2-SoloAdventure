@@ -17,6 +17,7 @@ public class ImageEditor {
 
     public AsciiEditorPainter asciiEditorPainter;
     public DBImage image;
+    private Runnable saveListener;
 
     private void createUIComponents() {
         asciiEditorTable = new AsciiEditorTable(10, 10);
@@ -50,5 +51,19 @@ public class ImageEditor {
         backgroundRadioButton.addActionListener(e -> {
             asciiEditorPainter.setDrawType(DrawType.BACKGROUND);
         });
+
+        saveButton.addActionListener(e -> save());
+    }
+
+    public void onSave(Runnable saveListener) {
+        this.saveListener = saveListener;
+    }
+
+    public void save() {
+        image.save();
+
+        if (saveListener != null) {
+            saveListener.run();
+        }
     }
 }
