@@ -1,10 +1,13 @@
 package me.mafrans.soloadventure.models;
 
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Reference;
 import me.mafrans.soloadventure.Database;
 
+@Entity
 public class DBImage {
     public String name;
-    public DBImageCell[][] cells;
+    @Reference public DBImageCell[][] cells;
 
     public DBImage(DBImageCell[][] cells) {
         this.cells = cells;

@@ -1,11 +1,14 @@
 package me.mafrans.soloadventure.models;
 
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Reference;
 import me.mafrans.soloadventure.Database;
 
+@Entity
 public class DBEnemy {
     public String name;
     public int hp;
-    public DBImage sprite;
+    @Reference public DBImage sprite;
 
     public DBEnemy(String name, int hp, DBImage sprite) {
         this.name = name;

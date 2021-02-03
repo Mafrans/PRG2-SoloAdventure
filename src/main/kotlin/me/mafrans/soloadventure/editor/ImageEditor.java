@@ -60,8 +60,7 @@ public class ImageEditor {
     }
 
     public void save() {
-        image.save();
-
+        this.image = asciiEditorPainter.toDBImage();
         if (saveListener != null) {
             saveListener.run();
         }

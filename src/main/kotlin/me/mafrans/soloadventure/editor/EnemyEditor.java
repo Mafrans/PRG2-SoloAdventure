@@ -3,6 +3,7 @@ package me.mafrans.soloadventure.editor;
 import me.mafrans.soloadventure.models.DBEnemy;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,13 +32,16 @@ public class EnemyEditor {
         editSpriteButton.addActionListener(e -> {
             ImageEditor imageEditor = new ImageEditor(this.enemy.sprite);
             imageEditor.onSave(() -> {
+                this.enemy.sprite = imageEditor.image;
                 spritePanel.setImage(imageEditor.image);
+                spritePanel.repaint();
             });
         });
     }
 
     private void createUIComponents() {
         spritePanel = new ImagePreviewPanel(null);
+        spritePanel.setPreferredSize(new Dimension(150, 150));
         spritePanelWrapper = new JPanel();
         spritePanelWrapper.add(spritePanel);
     }

@@ -1,6 +1,8 @@
 package me.mafrans.soloadventure.editor
 
+import me.mafrans.soloadventure.models.DBColorStyle
 import me.mafrans.soloadventure.models.DBImage
+import me.mafrans.soloadventure.models.DBImageCell
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
@@ -8,7 +10,11 @@ import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import javax.swing.JPanel
 
-class CellColor(var background: AsciiColor?, var foreground: AsciiColor?)
+class CellColor(var background: AsciiColor?, var foreground: AsciiColor?) {
+    override fun toString(): String {
+        return "CellColor(background=$background, foreground=$foreground)"
+    }
+}
 
 enum class DrawType {
     FOREGROUND,
@@ -46,12 +52,25 @@ class AsciiEditorPainter(val table: AsciiEditorTable) : JPanel() {
         for (x in image.cells.indices) {
             for (y in image.cells[x].indices) {
                 val cell = image.cells[x][y]
-                val background = AsciiColor.fromAnsi(cell.style.background)
-                val foreground = AsciiColor.fromAnsi(cell.style.foreground)
+                val background = AsciiColor.fromFG(cell.style.background)
+                val foreground = AsciiColor.fromFG(cell.style.foreground)
                 colors[x][y] = CellColor(background, foreground)
             }
         }
         repaint()
+    }
+
+    fun toDBImage(): DBImage {
+        val dbImage = DBImage(Array(table.columns) { Array(table.rows) { DBImageCell("", DBColorStyle(AsciiColor.WHITE.fg(), AsciiColor.BLACK.bg())) } })
+        for (x in colors.indices) {
+            for (y in colors[x].indices) {
+                val cell = colors[x][y]
+                val fg = cell.foreground?.fg()
+                val bg = cell.background?.bg()
+                dbImage.cells[x][y] = DBImageCell((table.model.getValueAt(y, x) as String?)?: "", DBColorStyle(fg?: AsciiColor.WHITE.fg(), bg?: AsciiColor.BLACK.bg()));
+            }
+        }
+        return dbImage;
     }
 
     override fun paint(g: Graphics?) {

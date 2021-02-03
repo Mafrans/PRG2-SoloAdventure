@@ -29,8 +29,12 @@ enum class AsciiColor(val ansiColor: Ansi.Color, val color: Color, val bright: B
             return values().find { it.color == color }
         }
 
-        fun fromAnsi(ansiColor: Int): AsciiColor? {
+        fun fromFG(ansiColor: Int): AsciiColor? {
             return values().find { it.fg() == ansiColor }
+        }
+
+        fun fromBG(ansiColor: Int): AsciiColor? {
+            return values().find { it.bg() == ansiColor }
         }
     }
 

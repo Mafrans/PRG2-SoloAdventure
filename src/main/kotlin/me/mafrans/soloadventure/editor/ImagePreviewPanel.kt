@@ -7,6 +7,7 @@ import javax.swing.JPanel
 class ImagePreviewPanel(var image: DBImage?) : JPanel() {
     override fun paint(g: Graphics?) {
         val image = this.image ?: return;
+        g?.clearRect(0, 0, width, height)
         for (x in image.cells.indices) {
             for (y in image.cells[x].indices) {
                 val cell = image.cells[x][y]
@@ -15,16 +16,21 @@ class ImagePreviewPanel(var image: DBImage?) : JPanel() {
                 val cellX = x * cellWidth
                 val cellY = y * cellHeight
 
-                val background = AsciiColor.fromAnsi(cell.style.background);
-                val foreground = AsciiColor.fromAnsi(cell.style.foreground);
-                if (background != null) {
-                    g?.color = background.color
-                    g?.fillRect(cellX, cellY, cellWidth, cellHeight);
+                var background = AsciiColor.BLACK
+                var foreground = AsciiColor.WHITE
+                var text = ""
+
+                if (cell != null) {
+                    println(cell.style)
+                    background = AsciiColor.fromBG(cell.style.background)!!
+                    foreground = AsciiColor.fromFG(cell.style.foreground)!!
+                    text = cell.text!!
                 }
-                if (foreground != null && cell.text != null) {
-                    g?.color = foreground.color
-                    g?.drawString(cell.text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
-                }
+
+                g?.color = background.color
+                g?.fillRect(cellX, cellY, cellWidth, cellHeight)
+                g?.color = foreground.color
+                g?.drawString(text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
             }
         }
     }
