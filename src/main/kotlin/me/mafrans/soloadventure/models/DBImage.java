@@ -9,7 +9,7 @@ public class DBImage {
         this.cells = cells;
     }
 
-    public DBImage find(String name) {
+    public static DBImage find(String name) {
         return Database.Images.Companion.findImage(name);
     }
 }
