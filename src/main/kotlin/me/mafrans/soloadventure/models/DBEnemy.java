@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 
 @Entity
 public class DBEnemy {
-    @Id private ObjectId id;
+    @Id public ObjectId id;
 
     public String name;
     public int hp;
@@ -36,7 +36,9 @@ public class DBEnemy {
     }
 
     public void save() {
-        sprite.save();
+        if (sprite != null) {
+            sprite.save();
+        }
         Database.Companion.save(this);
     }
 }
