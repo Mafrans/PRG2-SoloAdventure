@@ -7,7 +7,7 @@ import javax.swing.*;
 public class RoomEditor {
     private JTabbedPane tabbedPane1;
     private JPanel mainPanel;
-    private JComboBox roomColorComboBox;
+    private JComboBox<AsciiColor> roomColorComboBox;
     private JTextArea roomTextArea;
     private JButton editImageButton;
     private JButton addEnemyButton;
@@ -18,6 +18,10 @@ public class RoomEditor {
     private JPanel enemyContainer;
     private JPanel inspectionContainer;
     private JPanel roomImageWrapper;
+
+    private void createUIComponents() {
+        roomColorComboBox = new JComboBox<>(AsciiColor.values());
+    }
 
     public RoomEditor(DBEnemy enemy) {
         JFrame frame = new JFrame("Room Editor");
