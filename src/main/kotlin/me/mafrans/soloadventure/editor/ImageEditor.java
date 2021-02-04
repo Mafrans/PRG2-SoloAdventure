@@ -16,7 +16,7 @@ public class ImageEditor {
 
     public AsciiEditorPainter asciiEditorPainter;
     public DBImage image;
-    private Runnable saveListener;
+    private ImageSaveRunnable saveListener;
 
     private void createUIComponents() {
         asciiEditorTable = new AsciiEditorTable(10, 10);
@@ -54,14 +54,18 @@ public class ImageEditor {
         saveButton.addActionListener(e -> save());
     }
 
-    public void onSave(Runnable saveListener) {
+    public void onSave(ImageSaveRunnable saveListener) {
         this.saveListener = saveListener;
     }
 
     public void save() {
         this.image = asciiEditorPainter.toDBImage();
         if (saveListener != null) {
-            saveListener.run();
+            saveListener.run(this.image);
         }
+    }
+
+    interface ImageSaveRunnable {
+        void run(DBImage image);
     }
 }
