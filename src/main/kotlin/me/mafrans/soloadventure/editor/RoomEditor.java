@@ -1,5 +1,7 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.models.DBEnemy;
+
 import javax.swing.*;
 
 public class RoomEditor {
@@ -16,4 +18,12 @@ public class RoomEditor {
     private JPanel enemyContainer;
     private JPanel inspectionContainer;
     private JPanel roomImageWrapper;
+
+    public RoomEditor(DBEnemy enemy) {
+        JFrame frame = new JFrame("Room Editor");
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }
