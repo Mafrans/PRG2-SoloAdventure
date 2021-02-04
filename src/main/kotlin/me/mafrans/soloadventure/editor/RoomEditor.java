@@ -23,7 +23,7 @@ public class RoomEditor {
         roomColorComboBox = new JComboBox<>(AsciiColor.values());
     }
 
-    public RoomEditor(DBEnemy enemy) {
+    public RoomEditor() {
         JFrame frame = new JFrame("Room Editor");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
