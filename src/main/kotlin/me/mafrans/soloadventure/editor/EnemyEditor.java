@@ -27,7 +27,7 @@ public class EnemyEditor {
 
         JFrame frame = new JFrame("EnemyEditor");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
