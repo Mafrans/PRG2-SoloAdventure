@@ -19,8 +19,14 @@ public class RoomEditor {
     private JPanel inspectionContainer;
     private JPanel roomImageWrapper;
 
+    public ImagePreviewPanel imagePreviewPanel;
+
     private void createUIComponents() {
         roomColorComboBox = new JComboBox<>(AsciiColor.values());
+
+        imagePreviewPanel = new ImagePreviewPanel(null);
+        roomImageWrapper = new JPanel();
+        roomImageWrapper.add(imagePreviewPanel);
     }
 
     public RoomEditor() {
