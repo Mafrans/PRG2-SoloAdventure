@@ -2,6 +2,7 @@ package me.mafrans.soloadventure.editor;
 
 import me.mafrans.soloadventure.Database;
 import me.mafrans.soloadventure.models.DBEnemy;
+import me.mafrans.soloadventure.models.DBImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class EnemyEditor {
 
     public ImagePreviewPanel spritePanel;
     public DBEnemy enemy;
+    private EnemySaveRunnable saveListener;
 
     public EnemyEditor(DBEnemy enemy) {
         this.enemy = enemy;
@@ -40,11 +42,7 @@ public class EnemyEditor {
             });
         });
 
-        saveButton.addActionListener(e -> {
-            this.enemy.name = nameField.getText();
-            this.enemy.hp = (int) hpSpinner.getValue();
-            this.enemy.save();
-        });
+        saveButton.addActionListener(e -> save());
     }
 
     private void createUIComponents() {
@@ -52,5 +50,22 @@ public class EnemyEditor {
         spritePanel.setPreferredSize(new Dimension(150, 150));
         spritePanelWrapper = new JPanel();
         spritePanelWrapper.add(spritePanel);
+    }
+
+    public void onSave(EnemySaveRunnable saveListener) {
+        this.saveListener = saveListener;
+    }
+
+    public void save() {
+        if (saveListener != null) {
+            this.enemy.name = nameField.getText();
+            this.enemy.hp = (int) hpSpinner.getValue();
+            this.enemy.save();
+            saveListener.run(this.enemy);
+        }
+    }
+
+    interface EnemySaveRunnable {
+        void run(DBEnemy image);
     }
 }
