@@ -45,4 +45,11 @@ enum class AsciiColor(val ansiColor: Ansi.Color, val color: Color, val bright: B
     fun bg(): Int {
         return if(bright) ansiColor.bgBright() else ansiColor.bg()
     }
+
+    override fun toString(): String {
+        val name = super.toString()
+        return name.split('_').joinToString(" ") {
+            it[0].toUpperCase() + it.slice(1 until it.length).toLowerCase()
+        }
+    }
 }
