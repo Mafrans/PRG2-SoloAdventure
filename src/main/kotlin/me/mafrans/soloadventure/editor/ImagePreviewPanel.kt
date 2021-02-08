@@ -1,8 +1,10 @@
 package me.mafrans.soloadventure.editor
 
 import me.mafrans.soloadventure.models.DBImage
+import java.awt.Font
 import java.awt.Graphics
 import javax.swing.JPanel
+
 
 class ImagePreviewPanel(var image: DBImage?) : JPanel() {
     override fun paint(g: Graphics?) {
@@ -30,7 +32,8 @@ class ImagePreviewPanel(var image: DBImage?) : JPanel() {
                 g?.color = background.color
                 g?.fillRect(cellX, cellY, cellWidth, cellHeight)
                 g?.color = foreground.color
-                g?.drawString(text, cellX + cellWidth/2 - 4, cellY + cellHeight/2 + 4)
+                g?.font = g?.font?.deriveFont(Font.PLAIN, width/13f)
+                g?.drawString(text, cellX + cellWidth / 2 - 4, cellY + cellHeight / 2 + 4)
             }
         }
     }
