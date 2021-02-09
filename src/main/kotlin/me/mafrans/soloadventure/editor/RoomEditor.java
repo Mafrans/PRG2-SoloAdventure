@@ -4,6 +4,7 @@ import me.mafrans.soloadventure.models.DBEnemy;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ public class RoomEditor {
         roomImageWrapper.add(imagePreviewPanel);
 
         enemyContainer = new JPanel();
+        GridLayout layout = new GridLayout(0, 1);
+        enemyContainer.setLayout(layout);
     }
 
     public RoomEditor() {
