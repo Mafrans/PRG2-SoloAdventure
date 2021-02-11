@@ -1,5 +1,6 @@
 package me.mafrans.soloadventure.editor
 
 fun main() {
-    RoomEditor();
+    // RoomEditor();
+    ItemEditor(null);
 }

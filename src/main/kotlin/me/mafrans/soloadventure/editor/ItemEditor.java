@@ -18,6 +18,9 @@ public class ItemEditor {
     private JList tagList;
     private JButton newTagButton;
     private JPanel mainPanel;
+    private JPanel weaponEditPanel;
+    private JSpinner attackVarianceSpinner;
+    private JSpinner critPercentSpinner;
 
     public DBItem item;
 
@@ -38,6 +41,9 @@ public class ItemEditor {
         frame.setVisible(true);
 
         saveButton.addActionListener(e -> save());
+
+        weaponEditPanel.setVisible(isWeaponCheckBox.isSelected());
+        isWeaponCheckBox.addItemListener(e -> weaponEditPanel.setVisible(isWeaponCheckBox.isSelected()));
     }
 
     public void save() {
