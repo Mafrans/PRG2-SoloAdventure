@@ -11,7 +11,8 @@ import java.util.Arrays;
 
 @Entity
 public class DBItem {
-    @Id private ObjectId id;
+    @Id
+    public ObjectId id;
 
     public String name;
     public String description;

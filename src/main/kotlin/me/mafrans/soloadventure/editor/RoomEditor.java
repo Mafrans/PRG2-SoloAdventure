@@ -26,6 +26,7 @@ public class RoomEditor {
 
     public ImagePreviewPanel imagePreviewPanel;
     public HashMap<ObjectId, EnemyPreviewPanel> enemyPreviewMap = new HashMap<>();
+    public HashMap<ObjectId, ItemPreviewPanel> itemPreviewMap = new HashMap<>();
 
     private void createUIComponents() {
         roomColorComboBox = new JComboBox<>(AsciiColor.values());
@@ -34,9 +35,12 @@ public class RoomEditor {
         roomImageWrapper = new JPanel();
         roomImageWrapper.add(imagePreviewPanel);
 
-        enemyContainer = new JPanel();
         GridLayout layout = new GridLayout(0, 1);
+        enemyContainer = new JPanel();
         enemyContainer.setLayout(layout);
+
+        itemContainer = new JPanel();
+        itemContainer.setLayout(layout);
     }
 
     public RoomEditor() {
@@ -49,10 +53,25 @@ public class RoomEditor {
         addEnemyButton.addActionListener(e -> {
             addEnemy();
         });
+
+        addItemButton.addActionListener(e -> {
+            addItem();
+        });
     }
 
     public void addItem() {
-
+        ItemEditor itemEditor = new ItemEditor(null);
+        itemEditor.onSave(item -> {
+            if (enemyPreviewMap.containsKey(item.id)) {
+                ItemPreviewPanel itemPreviewPanel = itemPreviewMap.get(item.id);
+                itemPreviewPanel.update(item);
+            }
+            else {
+                ItemPreviewPanel itemPreviewPanel = new ItemPreviewPanel(item);
+                itemContainer.add(itemPreviewPanel);
+                itemPreviewMap.put(item.id, itemPreviewPanel);
+            }
+        });
     }
 
     public void addEnemy() {

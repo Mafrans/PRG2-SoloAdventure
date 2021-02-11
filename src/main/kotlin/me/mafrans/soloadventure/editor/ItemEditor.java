@@ -25,6 +25,7 @@ public class ItemEditor {
     private JTable tagTable;
     private JTable attackMessageTable;
 
+    private ItemSaveRunnable saveListener;
     public DBItem item;
 
     private void createUIComponents() {
@@ -63,21 +64,32 @@ public class ItemEditor {
         return values;
     }
 
+    public void onSave(ItemSaveRunnable saveListener) {
+        this.saveListener = saveListener;
+    }
+
     public void save() {
-        this.item.name = nameField.getText();
-        this.item.description = descriptionArea.getText();
-        this.item.color = ((AsciiColor) Objects.requireNonNull(colorComboBox.getSelectedItem())).fg();
-        this.item.tags = getTableAsList(tagTable).toArray(new String[0]);
-        this.item.isWeapon = isWeaponCheckBox.isSelected();
+        if (saveListener != null) {
+            this.item.name = nameField.getText();
+            this.item.description = descriptionArea.getText();
+            this.item.color = ((AsciiColor) Objects.requireNonNull(colorComboBox.getSelectedItem())).fg();
+            this.item.tags = getTableAsList(tagTable).toArray(new String[0]);
+            this.item.isWeapon = isWeaponCheckBox.isSelected();
 
-        this.item.weapon = new DBWeapon();
-        this.item.weapon.attackMessages = getTableAsList(attackMessageTable).toArray(new String[0]);
-        this.item.weapon.damage = (int) attackDamageSpinner.getValue();
-        this.item.weapon.variance = (int) attackVarianceSpinner.getValue();
-        this.item.weapon.critPercent = (int) critPercentSpinner.getValue();
+            this.item.weapon = new DBWeapon();
+            this.item.weapon.attackMessages = getTableAsList(attackMessageTable).toArray(new String[0]);
+            this.item.weapon.damage = (int) attackDamageSpinner.getValue();
+            this.item.weapon.variance = (int) attackVarianceSpinner.getValue();
+            this.item.weapon.critPercent = (int) critPercentSpinner.getValue();
 
-        System.out.println(this.item);
+            System.out.println(this.item);
 
-        this.item.save();
+            this.item.save();
+            saveListener.run(this.item);
+        }
+    }
+
+    interface ItemSaveRunnable {
+        void run(DBItem item);
     }
 }
