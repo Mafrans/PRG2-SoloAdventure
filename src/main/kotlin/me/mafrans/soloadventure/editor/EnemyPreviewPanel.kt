@@ -12,7 +12,8 @@ class EnemyPreviewPanel(enemy: DBEnemy) : JPanel() {
     var namePanel = JLabel(enemy.name)
     var hpPanel = JLabel(enemy.hp.toString())
     var previewPanel: ImagePreviewPanel? = null
-    var editButton = JButton("Edit")
+    var editButton = JButton("📝")
+    var deleteButton = JButton("❌")
 
     init {
         layout = BoxLayout(this, BoxLayout.LINE_AXIS)
@@ -37,6 +38,7 @@ class EnemyPreviewPanel(enemy: DBEnemy) : JPanel() {
         add(infoPanel)
         add(Box.createHorizontalGlue());
         add(editButton)
+        add(deleteButton)
     }
 
     fun update(enemy: DBEnemy) {

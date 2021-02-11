@@ -12,7 +12,8 @@ import javax.swing.border.EmptyBorder
 class ItemPreviewPanel(item: DBItem) : JPanel() {
     var namePanel = JLabel()
     var descriptionPanel = JLabel()
-    var editButton = JButton("Edit")
+    var editButton = JButton("📝")
+    var deleteButton = JButton("❌")
 
     init {
         layout = BoxLayout(this, BoxLayout.LINE_AXIS)
@@ -26,6 +27,7 @@ class ItemPreviewPanel(item: DBItem) : JPanel() {
         add(descriptionPanel)
         add(Box.createHorizontalGlue());
         add(editButton)
+        add(deleteButton)
 
         update(item);
     }
