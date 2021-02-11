@@ -17,4 +17,8 @@ public class DBWeapon {
     public void save() {
         Database.Companion.save(this);
     }
+
+    public void delete() {
+        Database.Companion.delete(this);
+    }
 }

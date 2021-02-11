@@ -25,6 +25,10 @@ class Database {
             }
             catch (e: UpdateException) {}
         }
+
+        fun <T> delete(entity: T) {
+            db.datastore.delete(entity);
+        }
     }
 
     class Images {

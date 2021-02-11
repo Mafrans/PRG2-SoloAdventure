@@ -7,6 +7,7 @@ import me.mafrans.soloadventure.models.DBWeapon;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +63,28 @@ public class ItemEditor {
             }
         }
         return values;
+    }
+
+    public void setListToTable(JTable table, List<Object> values) {
+        TableModel model = table.getModel();
+        for (int i = 0; i < values.size(); i++) {
+            model.setValueAt(values.get(i), i, 0);
+        }
+    }
+
+    public void update() {
+        if(this.item != null) {
+            nameField.setText(this.item.name);
+            descriptionArea.setText(this.item.description);
+            colorComboBox.setSelectedItem(AsciiColor.Companion.fromFG(this.item.color));
+            setListToTable(tagTable, Arrays.asList(this.item.tags));
+            isWeaponCheckBox.setSelected(this.item.isWeapon);
+
+            setListToTable(attackMessageTable, Arrays.asList(this.item.weapon.attackMessages));
+            attackDamageSpinner.setValue(this.item.weapon.damage);
+            attackVarianceSpinner.setValue(this.item.weapon.variance);
+            critPercentSpinner.setValue(this.item.weapon.critPercent);
+        }
     }
 
     public void onSave(ItemSaveRunnable saveListener) {

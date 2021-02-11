@@ -44,6 +44,11 @@ public class DBItem {
         Database.Companion.save(this);
     }
 
+    public void delete() {
+        weapon.delete();
+        Database.Companion.delete(this);
+    }
+
     @Override
     public String toString() {
         return "DBItem{" +
