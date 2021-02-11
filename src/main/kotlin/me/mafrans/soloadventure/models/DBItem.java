@@ -3,6 +3,7 @@ package me.mafrans.soloadventure.models;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Reference;
+import me.mafrans.soloadventure.Database;
 import me.mafrans.soloadventure.editor.AsciiColor;
 import org.bson.types.ObjectId;
 
@@ -33,5 +34,10 @@ public class DBItem {
         this.name = name;
         this.description = description;
         this.color = AsciiColor.WHITE.fg();
+    }
+
+    public void save() {
+        weapon.save();
+        Database.Companion.save(this);
     }
 }

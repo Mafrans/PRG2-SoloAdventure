@@ -2,8 +2,11 @@ package me.mafrans.soloadventure.editor;
 
 import me.mafrans.soloadventure.models.DBEnemy;
 import me.mafrans.soloadventure.models.DBItem;
+import me.mafrans.soloadventure.models.DBWeapon;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import java.util.Objects;
 
 public class ItemEditor {
     private JButton saveButton;
@@ -11,21 +14,21 @@ public class ItemEditor {
     private JTextArea descriptionArea;
     private JTabbedPane tabbedPane1;
     private JCheckBox isWeaponCheckBox;
-    private JList messageList;
     private JSpinner attackDamageSpinner;
     private JComboBox colorComboBox;
-    private JButton newAttackMessageButton;
-    private JList tagList;
-    private JButton newTagButton;
     private JPanel mainPanel;
     private JPanel weaponEditPanel;
     private JSpinner attackVarianceSpinner;
     private JSpinner critPercentSpinner;
+    private JTable tagTable;
+    private JTable attackMessageTable;
 
     public DBItem item;
 
     private void createUIComponents() {
         colorComboBox = new JComboBox(AsciiColor.values());
+        tagTable = new JTable(8, 1);
+        attackMessageTable = new JTable(8, 1);
     }
 
     public ItemEditor(DBItem item) {
@@ -46,6 +49,28 @@ public class ItemEditor {
         isWeaponCheckBox.addItemListener(e -> weaponEditPanel.setVisible(isWeaponCheckBox.isSelected()));
     }
 
+    public Object[] getTableAsList(JTable table) {
+        TableModel model = table.getModel();
+        Object[] values = new String[model.getRowCount()];
+        for(int i = 0; i < values.length; i++) {
+            values[i] = model.getValueAt(i, 0);
+        }
+        return values;
+    }
+
     public void save() {
+        this.item.name = nameField.getText();
+        this.item.description = descriptionArea.getText();
+        this.item.color = ((AsciiColor) Objects.requireNonNull(colorComboBox.getSelectedItem())).fg();
+        this.item.tags = (String[]) getTableAsList(tagTable);
+        this.item.isWeapon = isWeaponCheckBox.isSelected();
+
+        this.item.weapon = new DBWeapon();
+        this.item.weapon.attackMessages = (String[]) getTableAsList(attackMessageTable);
+        this.item.weapon.damage = (int) attackDamageSpinner.getValue();
+        this.item.weapon.variance = (int) attackVarianceSpinner.getValue();
+        this.item.weapon.critPercent = (int) critPercentSpinner.getValue();
+
+        this.item.save();
     }
 }
