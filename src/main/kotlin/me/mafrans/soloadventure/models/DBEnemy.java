@@ -41,4 +41,11 @@ public class DBEnemy {
         }
         Database.Companion.save(this);
     }
+
+    public void delete() {
+        if (sprite != null) {
+            sprite.delete();
+        }
+        Database.Companion.delete(this);
+    }
 }

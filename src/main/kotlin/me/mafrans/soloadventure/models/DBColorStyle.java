@@ -26,4 +26,8 @@ public class DBColorStyle {
     public void save() {
         Database.Companion.save(this);
     }
+
+    public void delete() {
+        Database.Companion.delete(this);
+    }
 }

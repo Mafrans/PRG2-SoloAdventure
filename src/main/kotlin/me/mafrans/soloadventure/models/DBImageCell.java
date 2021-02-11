@@ -27,4 +27,9 @@ public class DBImageCell {
         style.save();
         Database.Companion.save(this);
     }
+
+    public void delete() {
+        style.delete();
+        Database.Companion.delete(this);
+    }
 }

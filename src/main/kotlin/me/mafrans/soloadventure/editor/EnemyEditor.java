@@ -65,6 +65,13 @@ public class EnemyEditor {
         }
     }
 
+    public void update() {
+        nameField.setText(this.enemy.name);
+        hpSpinner.setValue(this.enemy.hp);
+        spritePanel.setImage(this.enemy.sprite);
+        spritePanel.repaint();
+    }
+
     interface EnemySaveRunnable {
         void run(DBEnemy image);
     }

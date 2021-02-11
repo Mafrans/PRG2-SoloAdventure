@@ -35,4 +35,13 @@ public class DBImage {
         }
         Database.Companion.save(this);
     }
+
+    public void delete() {
+        for (DBImageCell[] column : cells) {
+            for (DBImageCell cell : column) {
+                cell.delete();
+            }
+        }
+        Database.Companion.delete(this);
+    }
 }

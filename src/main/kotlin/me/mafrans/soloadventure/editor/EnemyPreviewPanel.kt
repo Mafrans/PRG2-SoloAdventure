@@ -8,7 +8,7 @@ import java.awt.GridLayout
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 
-class EnemyPreviewPanel(enemy: DBEnemy) : JPanel() {
+class EnemyPreviewPanel(var enemy: DBEnemy) : JPanel() {
     var namePanel = JLabel(enemy.name)
     var hpPanel = JLabel(enemy.hp.toString())
     var previewPanel: ImagePreviewPanel? = null
@@ -39,11 +39,35 @@ class EnemyPreviewPanel(enemy: DBEnemy) : JPanel() {
         add(Box.createHorizontalGlue());
         add(editButton)
         add(deleteButton)
+
+        editButton.addActionListener { e -> edit() }
+        deleteButton.addActionListener {
+            val response = JOptionPane.showConfirmDialog(this, "Do you really wish to delete " + this.enemy.name + "?", "Really delete?", JOptionPane.YES_NO_OPTION);
+            if(response == JOptionPane.YES_OPTION) {
+                delete();
+            }
+        }
     }
 
     fun update(enemy: DBEnemy) {
         namePanel.text = enemy.name
         previewPanel!!.image = enemy.sprite
         previewPanel!!.repaint()
+    }
+
+    fun edit() {
+        val editor = EnemyEditor(this.enemy)
+        editor.update()
+        editor.onSave { enemy ->
+            run {
+                this.enemy = enemy
+                this.update(enemy)
+            }
+        }
+    }
+
+    fun delete() {
+        this.enemy.delete()
+        this.parent.remove(this)
     }
 }
