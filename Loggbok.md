@@ -15,3 +15,13 @@
 **Vad jag ska göra nästa gång:**
 - Färdigställa ImagePreviewPanel
 - Fortsätta jobba på EnemyEditor
+
+### 15 Februari
+**Vad jag gjort idag:**
+- Typ allt actually
+- Nästan klar med editorn vid det här laget
+
+**Vad jag ska göra nästa gång:**
+- Färdigställa RoomEditor
+- Fortsätta jobba på MapEditor
+- Göra allt sparbart.
