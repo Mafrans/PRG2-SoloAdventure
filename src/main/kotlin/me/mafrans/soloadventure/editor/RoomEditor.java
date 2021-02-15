@@ -1,12 +1,9 @@
 package me.mafrans.soloadventure.editor;
 
-import me.mafrans.soloadventure.models.DBEnemy;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class RoomEditor {
@@ -23,6 +20,8 @@ public class RoomEditor {
     private JPanel enemyContainer;
     private JPanel inspectionContainer;
     private JPanel roomImageWrapper;
+    private JTextPane editorPane;
+    private JPanel editorPaneWrapper;
 
     public ImagePreviewPanel imagePreviewPanel;
     public HashMap<ObjectId, EnemyPreviewPanel> enemyPreviewMap = new HashMap<>();
@@ -41,6 +40,8 @@ public class RoomEditor {
 
         itemContainer = new JPanel();
         itemContainer.setLayout(layout);
+
+        editorPane = new JSEditorPane();
     }
 
     public RoomEditor() {
