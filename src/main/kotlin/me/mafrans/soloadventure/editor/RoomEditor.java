@@ -20,7 +20,8 @@ public class RoomEditor {
     private JPanel enemyContainer;
     private JPanel inspectionContainer;
     private JPanel roomImageWrapper;
-    private JTextPane editorPane;
+    private JTextPane onEnterPane;
+    private JTabbedPane eventsTabs;
     private JPanel editorPaneWrapper;
 
     public ImagePreviewPanel imagePreviewPanel;
@@ -41,7 +42,7 @@ public class RoomEditor {
         itemContainer = new JPanel();
         itemContainer.setLayout(layout);
 
-        editorPane = new JSEditorPane();
+        onEnterPane = new JSEditorPane();
     }
 
     public RoomEditor() {
