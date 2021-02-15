@@ -75,7 +75,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Text"/>
+                      <text value="Description"/>
                     </properties>
                   </component>
                   <scrollpane id="c01fd">
@@ -85,7 +85,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="5e194" class="javax.swing.JTextArea" binding="roomTextArea">
+                      <component id="5e194" class="javax.swing.JTextArea" binding="roomDescriptionArea">
                         <constraints/>
                         <properties/>
                       </component>

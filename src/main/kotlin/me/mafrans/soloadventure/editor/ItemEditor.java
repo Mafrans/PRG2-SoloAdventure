@@ -1,5 +1,6 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.Util;
 import me.mafrans.soloadventure.models.DBEnemy;
 import me.mafrans.soloadventure.models.DBItem;
 import me.mafrans.soloadventure.models.DBWeapon;
@@ -53,34 +54,15 @@ public class ItemEditor {
         isWeaponCheckBox.addItemListener(e -> weaponEditPanel.setVisible(isWeaponCheckBox.isSelected()));
     }
 
-    public List<Object> getTableAsList(JTable table) {
-        TableModel model = table.getModel();
-        List<Object> values = new ArrayList<>();
-        for(int i = 0; i < model.getRowCount(); i++) {
-            Object value = model.getValueAt(i, 0);
-            if (value != null) {
-                values.add(value);
-            }
-        }
-        return values;
-    }
-
-    public void setListToTable(JTable table, List<Object> values) {
-        TableModel model = table.getModel();
-        for (int i = 0; i < values.size(); i++) {
-            model.setValueAt(values.get(i), i, 0);
-        }
-    }
-
     public void update() {
         if(this.item != null) {
             nameField.setText(this.item.name);
             descriptionArea.setText(this.item.description);
             colorComboBox.setSelectedItem(AsciiColor.Companion.fromFG(this.item.color));
-            setListToTable(tagTable, Arrays.asList(this.item.tags));
+            Util.Companion.setListToTable(tagTable, Arrays.asList(this.item.tags));
             isWeaponCheckBox.setSelected(this.item.isWeapon);
 
-            setListToTable(attackMessageTable, Arrays.asList(this.item.weapon.attackMessages));
+            Util.Companion.setListToTable(attackMessageTable, Arrays.asList(this.item.weapon.attackMessages));
             attackDamageSpinner.setValue(this.item.weapon.damage);
             attackVarianceSpinner.setValue(this.item.weapon.variance);
             critPercentSpinner.setValue(this.item.weapon.critPercent);
@@ -92,24 +74,24 @@ public class ItemEditor {
     }
 
     public void save() {
+        this.item.name = nameField.getText();
+        this.item.description = descriptionArea.getText();
+        this.item.color = ((AsciiColor) Objects.requireNonNull(colorComboBox.getSelectedItem())).fg();
+        this.item.tags = Util.Companion.getTableAsList(tagTable).toArray(new String[0]);
+        this.item.isWeapon = isWeaponCheckBox.isSelected();
+
+        this.item.weapon = new DBWeapon();
+        this.item.weapon.attackMessages = Util.Companion.getTableAsList(attackMessageTable).toArray(new String[0]);
+        this.item.weapon.damage = (int) attackDamageSpinner.getValue();
+        this.item.weapon.variance = (int) attackVarianceSpinner.getValue();
+        this.item.weapon.critPercent = (int) critPercentSpinner.getValue();
+
+        System.out.println(this.item);
         if (saveListener != null) {
-            this.item.name = nameField.getText();
-            this.item.description = descriptionArea.getText();
-            this.item.color = ((AsciiColor) Objects.requireNonNull(colorComboBox.getSelectedItem())).fg();
-            this.item.tags = getTableAsList(tagTable).toArray(new String[0]);
-            this.item.isWeapon = isWeaponCheckBox.isSelected();
-
-            this.item.weapon = new DBWeapon();
-            this.item.weapon.attackMessages = getTableAsList(attackMessageTable).toArray(new String[0]);
-            this.item.weapon.damage = (int) attackDamageSpinner.getValue();
-            this.item.weapon.variance = (int) attackVarianceSpinner.getValue();
-            this.item.weapon.critPercent = (int) critPercentSpinner.getValue();
-
-            System.out.println(this.item);
-
-            this.item.save();
             saveListener.run(this.item);
         }
+
+        this.item.save();
     }
 
     interface ItemSaveRunnable {

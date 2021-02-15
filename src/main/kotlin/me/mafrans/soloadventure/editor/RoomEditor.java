@@ -1,5 +1,7 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.Util;
+import me.mafrans.soloadventure.models.*;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;
@@ -7,13 +9,15 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RoomEditor {
     private JTabbedPane tabbedPane1;
     private JPanel mainPanel;
     private JComboBox<AsciiColor> roomColorComboBox;
-    private JTextArea roomTextArea;
+    private JTextArea roomDescriptionArea;
     private JButton editImageButton;
     private JButton addEnemyButton;
     private JButton addItemButton;
@@ -28,9 +32,13 @@ public class RoomEditor {
     private JTable inspectionTable;
     private JPanel editorPaneWrapper;
 
+    private DBImage image;
+    private DBRoom room;
+
     public ImagePreviewPanel imagePreviewPanel;
-    public HashMap<ObjectId, EnemyPreviewPanel> enemyPreviewMap = new HashMap<>();
-    public HashMap<ObjectId, ItemPreviewPanel> itemPreviewMap = new HashMap<>();
+    public HashMap<DBEnemy, EnemyPreviewPanel> enemyPreviewMap = new HashMap<>();
+    public HashMap<DBItem, ItemPreviewPanel> itemPreviewMap = new HashMap<>();
+    private RoomSaveRunnable saveListener;
 
     private void createUIComponents() {
         roomColorComboBox = new JComboBox<>(AsciiColor.values());
@@ -57,10 +65,12 @@ public class RoomEditor {
         );
     }
 
-    public RoomEditor() {
+    public RoomEditor(DBRoom room) {
+        this.room = room;
+
         JFrame frame = new JFrame("Room Editor");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
@@ -76,6 +86,10 @@ public class RoomEditor {
             DefaultTableModel model = ((DefaultTableModel) inspectionTable.getModel());
             model.addRow(new Object[] { "key", "text" });
             inspectionTable.setModel(model);
+        });
+
+        saveButton.addActionListener(e -> {
+            this.save();
         });
 
         inspectionTable.getModel().addTableModelListener(e -> {
@@ -106,14 +120,14 @@ public class RoomEditor {
     public void addItem() {
         ItemEditor itemEditor = new ItemEditor(null);
         itemEditor.onSave(item -> {
-            if (enemyPreviewMap.containsKey(item.id)) {
-                ItemPreviewPanel itemPreviewPanel = itemPreviewMap.get(item.id);
+            if (itemPreviewMap.containsKey(item)) {
+                ItemPreviewPanel itemPreviewPanel = itemPreviewMap.get(item);
                 itemPreviewPanel.update(item);
             }
             else {
                 ItemPreviewPanel itemPreviewPanel = new ItemPreviewPanel(item);
                 itemContainer.add(itemPreviewPanel);
-                itemPreviewMap.put(item.id, itemPreviewPanel);
+                itemPreviewMap.put(item, itemPreviewPanel);
             }
         });
     }
@@ -121,19 +135,45 @@ public class RoomEditor {
     public void addEnemy() {
         EnemyEditor enemyEditor = new EnemyEditor(null);
         enemyEditor.onSave(enemy -> {
-            if (enemyPreviewMap.containsKey(enemy.id)) {
-                EnemyPreviewPanel enemyPreviewPanel = enemyPreviewMap.get(enemy.id);
+            if (enemyPreviewMap.containsKey(enemy)) {
+                EnemyPreviewPanel enemyPreviewPanel = enemyPreviewMap.get(enemy);
                 enemyPreviewPanel.update(enemy);
             }
             else {
                 EnemyPreviewPanel enemyPreviewPanel = new EnemyPreviewPanel(enemy);
                 enemyContainer.add(enemyPreviewPanel);
-                enemyPreviewMap.put(enemy.id, enemyPreviewPanel);
+                enemyPreviewMap.put(enemy, enemyPreviewPanel);
             }
         });
     }
 
-    public void addInvestigation() {
+    public void onSave(RoomSaveRunnable saveListener) {
+        this.saveListener = saveListener;
+    }
 
+    public void save() {
+        this.room.description = roomDescriptionArea.getText();
+        this.room.enemies = enemyPreviewMap.keySet();
+        this.room.items = itemPreviewMap.keySet();
+        this.room.image = image;
+
+        HashMap<String, String> inspections = new HashMap<>();
+        for (int r = 0; r < inspectionTable.getRowCount(); r++) {
+            inspections.put(
+                    (String) inspectionTable.getValueAt(0, 0),
+                    (String) inspectionTable.getValueAt(0, 1)
+                );
+        }
+        this.room.inspections = inspections;
+
+        if (saveListener != null) {
+            saveListener.run(this.room);
+        }
+
+        this.room.save();
+    }
+
+    interface RoomSaveRunnable {
+        void run(DBRoom item);
     }
 }
