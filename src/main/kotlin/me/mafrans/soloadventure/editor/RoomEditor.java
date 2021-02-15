@@ -3,6 +3,9 @@ package me.mafrans.soloadventure.editor;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -22,6 +25,7 @@ public class RoomEditor {
     private JPanel roomImageWrapper;
     private JTextPane onEnterPane;
     private JTabbedPane eventsTabs;
+    private JTable inspectionTable;
     private JPanel editorPaneWrapper;
 
     public ImagePreviewPanel imagePreviewPanel;
@@ -42,7 +46,15 @@ public class RoomEditor {
         itemContainer = new JPanel();
         itemContainer.setLayout(layout);
 
+        inspectionTable = new JTable();
+        inspectionTable.setModel(new DefaultTableModel(new String[] { "Key", "Inspection" }, 0));
+
         onEnterPane = new JSEditorPane();
+        onEnterPane.setText(
+                "function onEnter (room, oldRoom, player) {\n" +
+                "    \n" +
+                "}\n"
+        );
     }
 
     public RoomEditor() {
@@ -58,6 +70,36 @@ public class RoomEditor {
 
         addItemButton.addActionListener(e -> {
             addItem();
+        });
+
+        addInspectionButton.addActionListener(e -> {
+            DefaultTableModel model = ((DefaultTableModel) inspectionTable.getModel());
+            model.addRow(new Object[] { "key", "text" });
+            inspectionTable.setModel(model);
+        });
+
+        inspectionTable.getModel().addTableModelListener(e -> {
+            DefaultTableModel model = ((DefaultTableModel) inspectionTable.getModel());
+
+            int columnCount = inspectionTable.getModel().getColumnCount();
+            int rowCount = inspectionTable.getModel().getRowCount();
+            for (int r = 0; r < rowCount; r++) {
+                boolean hasContent = false;
+                for (int c = 0; c < columnCount; c++) {
+                    String value = (String) inspectionTable.getModel().getValueAt(r, c);
+
+                    if (value != null && !value.isBlank()) {
+                        hasContent = true;
+                        break;
+                    }
+                }
+
+                if (!hasContent) {
+                    model.removeRow(r);
+                }
+            }
+
+            inspectionTable.setModel(model);
         });
     }
 
