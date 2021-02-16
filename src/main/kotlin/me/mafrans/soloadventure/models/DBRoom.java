@@ -7,6 +7,7 @@ import me.mafrans.soloadventure.Database;
 import me.mafrans.soloadventure.editor.AsciiColor;
 import org.bson.types.ObjectId;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 public class DBRoom {
     @Id private ObjectId id;
 
+    public int color;
     @Reference public DBImage image;
     public String description;
     @Reference public Set<DBItem> items;

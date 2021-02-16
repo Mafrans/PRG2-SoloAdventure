@@ -156,6 +156,7 @@ public class RoomEditor {
         this.room.enemies = enemyPreviewMap.keySet();
         this.room.items = itemPreviewMap.keySet();
         this.room.image = image;
+        this.room.color = ((AsciiColor) roomColorComboBox.getSelectedItem()).getColor().getRGB();
 
         HashMap<String, String> inspections = new HashMap<>();
         for (int r = 0; r < inspectionTable.getRowCount(); r++) {
