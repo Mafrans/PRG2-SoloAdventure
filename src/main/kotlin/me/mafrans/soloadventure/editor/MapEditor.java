@@ -43,12 +43,14 @@ public class MapEditor {
                     RoomEditor editor = new RoomEditor(room);
                     editor.onSave(r -> {
                         rooms[_x][_y] = r;
-                        button.setBackground(new Color(r.color));
+
+                        if (r == null) button.setBackground(null);
+                        else button.setBackground(new Color(r.color));
 
                         for (Point direction : directions) {
                             if (rooms[_x + direction.x][_y + direction.y] == null) {
                                 JButton btn = roomButtons[_x + direction.x][_y + direction.y];
-                                btn.setVisible(true);
+                                btn.setVisible(r != null);
                             }
                         }
                     });

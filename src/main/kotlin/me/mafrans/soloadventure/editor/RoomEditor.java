@@ -30,7 +30,9 @@ public class RoomEditor {
     private JTextPane onEnterPane;
     private JTabbedPane eventsTabs;
     private JTable inspectionTable;
+    private JButton deleteButton;
     private JPanel editorPaneWrapper;
+    private JFrame frame;
 
     private DBImage image;
     private DBRoom room;
@@ -68,7 +70,7 @@ public class RoomEditor {
     public RoomEditor(DBRoom room) {
         this.room = room;
 
-        JFrame frame = new JFrame("Room Editor");
+        frame = new JFrame("Room Editor");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
@@ -90,6 +92,13 @@ public class RoomEditor {
 
         saveButton.addActionListener(e -> {
             this.save();
+        });
+
+        deleteButton.addActionListener(e -> {
+            int response = JOptionPane.showConfirmDialog(mainPanel, "Do you really wish to delete this room?", "Really delete?", JOptionPane.YES_NO_OPTION);
+            if(response == JOptionPane.YES_OPTION) {
+                this.delete();
+            }
         });
 
         inspectionTable.getModel().addTableModelListener(e -> {
@@ -172,6 +181,14 @@ public class RoomEditor {
         }
 
         this.room.save();
+    }
+
+    public void delete() {
+        if (saveListener != null) {
+            saveListener.run(null);
+        }
+        this.room.delete();
+        frame.dispose();
     }
 
     interface RoomSaveRunnable {
