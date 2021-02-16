@@ -17,6 +17,13 @@ public class MapEditor {
     public JButton[][] roomButtons = new JButton[MAP_WIDTH][MAP_HEIGHT];
     public DBRoom[][] rooms = new DBRoom[MAP_WIDTH][MAP_HEIGHT];
 
+    public Point[] directions = new Point[] {
+            new Point(1, 0),
+            new Point(0, 1),
+            new Point(-1, 0),
+            new Point(0, -1),
+    };
+
     private void createUIComponents() {
         roomGridPanel = new JPanel();
         roomGridPanel.setLayout(new GridLayout(MAP_WIDTH, MAP_HEIGHT));
@@ -35,8 +42,14 @@ public class MapEditor {
 
                     RoomEditor editor = new RoomEditor(room);
                     editor.onSave(r -> {
-                        if (button.getText().equals(" ")) {
-                            button.setText("🚪");
+                        rooms[_x][_y] = r;
+                        button.setBackground(new Color(r.color));
+
+                        for (Point direction : directions) {
+                            if (rooms[_x + direction.x][_y + direction.y] == null) {
+                                JButton btn = roomButtons[_x + direction.x][_y + direction.y];
+                                btn.setVisible(true);
+                            }
                         }
                     });
                 });
