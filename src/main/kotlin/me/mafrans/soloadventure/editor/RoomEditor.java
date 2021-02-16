@@ -70,6 +70,12 @@ public class RoomEditor {
     public RoomEditor(DBRoom room) {
         this.room = room;
 
+        if (this.room == null) {
+            this.room = new DBRoom();
+        }
+        System.out.println(this.room);
+        update(this.room);
+
         frame = new JFrame("Room Editor");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -167,6 +173,10 @@ public class RoomEditor {
         this.room.image = image;
         this.room.color = ((AsciiColor) roomColorComboBox.getSelectedItem()).getColor().getRGB();
 
+        DBRoomEvents events = new DBRoomEvents();
+        events.onEnter = onEnterPane.getText();
+        this.room.events = events;
+
         HashMap<String, String> inspections = new HashMap<>();
         for (int r = 0; r < inspectionTable.getRowCount(); r++) {
             inspections.put(
@@ -181,6 +191,33 @@ public class RoomEditor {
         }
 
         this.room.save();
+    }
+
+    public void update(DBRoom room) {
+        roomDescriptionArea.setText(room.description);
+        for (DBEnemy enemy : room.enemies) {
+            EnemyPreviewPanel enemyPreviewPanel = new EnemyPreviewPanel(enemy);
+            enemyContainer.add(enemyPreviewPanel);
+            enemyPreviewMap.put(enemy, enemyPreviewPanel);
+        }
+        for (DBItem item : room.items) {
+            ItemPreviewPanel itemPreviewPanel = new ItemPreviewPanel(item);
+            itemContainer.add(itemPreviewPanel);
+            itemPreviewMap.put(item, itemPreviewPanel);
+        }
+        image = room.image;
+        imagePreviewPanel.setImage(image);
+        roomColorComboBox.setSelectedItem(AsciiColor.Companion.from(new Color(room.color)));
+
+        onEnterPane.setText(room.events.onEnter);
+
+        int i = 0;
+        inspectionTable.setModel(new DefaultTableModel(new String[] { "Key", "Inspection" }, room.inspections.size()));
+        for(String key : room.inspections.keySet()) {
+            inspectionTable.setValueAt(key, i, 0);
+            inspectionTable.setValueAt(room.inspections.get(key), i, 1);
+            i++;
+        }
     }
 
     public void delete() {

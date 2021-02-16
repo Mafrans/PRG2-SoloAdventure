@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,9 +23,21 @@ public class DBRoom {
     @Reference public Set<DBItem> items;
     @Reference public Set<DBEnemy> enemies;
     public HashMap<String, String> inspections;
-    @Reference DBRoomEvents events;
+    @Reference public DBRoomEvents events;
 
-    public DBRoom() { }
+    public DBRoom() {
+        this(Color.WHITE.getRGB(), null, "", new HashSet<>(), new HashSet<>(), new HashMap<>(), new DBRoomEvents());
+    }
+
+    public DBRoom(int color, DBImage image, String description, Set<DBItem> items, Set<DBEnemy> enemies, HashMap<String, String> inspections, DBRoomEvents events) {
+        this.color = color;
+        this.image = image;
+        this.description = description;
+        this.items = items;
+        this.enemies = enemies;
+        this.inspections = inspections;
+        this.events = events;
+    }
 
     public void save() {
         if (image != null) {
