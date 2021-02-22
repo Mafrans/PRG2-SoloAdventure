@@ -29,6 +29,10 @@ class Database {
         fun <T> delete(entity: T) {
             db.datastore.delete(entity);
         }
+
+        fun <T> first(clazz: Class<T>): T {
+            return db.datastore.find(clazz).first();
+        }
     }
 
     class Images {

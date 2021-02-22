@@ -25,3 +25,10 @@
 - Färdigställa RoomEditor
 - Fortsätta jobba på MapEditor
 - Göra allt sparbart.
+
+### 22 Februari
+**Vad jag gjort idag:**
+- Gjort så Maps kan sparas
+
+**Vad jag ska göra nästa gång:**
+- Göra så allt inte exploderar när man försöker spara

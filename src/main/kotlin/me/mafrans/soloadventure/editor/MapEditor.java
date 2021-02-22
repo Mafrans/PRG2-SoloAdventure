@@ -1,18 +1,19 @@
 package me.mafrans.soloadventure.editor;
 
-import me.mafrans.soloadventure.models.DBRoom;
+import me.mafrans.soloadventure.models.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.HashMap;
+
+import static me.mafrans.soloadventure.models.DBGame.MAP_HEIGHT;
+import static me.mafrans.soloadventure.models.DBGame.MAP_WIDTH;
 
 public class MapEditor {
     private JPanel mainPanel;
     private JButton saveButton;
     private JPanel roomGridPanel;
-
-    private final int MAP_WIDTH = 9;
-    private final int MAP_HEIGHT = 9;
 
     public JButton[][] roomButtons = new JButton[MAP_WIDTH][MAP_HEIGHT];
     public DBRoom[][] rooms = new DBRoom[MAP_WIDTH][MAP_HEIGHT];
@@ -23,6 +24,8 @@ public class MapEditor {
             new Point(-1, 0),
             new Point(0, -1),
     };
+
+    private DBGame game;
 
     private void createUIComponents() {
         roomGridPanel = new JPanel();
@@ -66,7 +69,26 @@ public class MapEditor {
         startButton.setVisible(true);
     }
 
-    public MapEditor() {
+    public void save() {
+        this.game.rooms = rooms;
+        this.game.save();
+    }
+
+    public void update(DBGame game) {
+        rooms = game.rooms;
+    }
+
+    public MapEditor(DBGame game) {
+        this.game = game;
+        if(this.game == null) {
+            this.game = new DBGame();
+        }
+        update(this.game);
+
+        saveButton.addActionListener(e -> {
+            this.save();
+        });
+
         JFrame frame = new JFrame("Map Editor");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
