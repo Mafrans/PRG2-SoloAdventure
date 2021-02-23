@@ -32,3 +32,11 @@
 
 **Vad jag ska göra nästa gång:**
 - Göra så allt inte exploderar när man försöker spara
+
+### 23 Februari
+**Vad jag gjort idag:**
+- Inget
+
+**Vad jag ska göra nästa gång:**
+- Göra så allt inte exploderar när man försöker spara
+- Dokumentera (hemma)
