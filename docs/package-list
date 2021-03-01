@@ -1,0 +1,20 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:me.mafrans.soloadventure.editor.forms/EnemyEditor.EnemySaveRunnable///PointingToDeclaration/me/mafrans/soloadventure/editor/forms/EnemyEditor.EnemySaveRunnable.html
+$dokka.location:me.mafrans.soloadventure.editor.forms/ImageEditor.ImageSaveRunnable///PointingToDeclaration/me/mafrans/soloadventure/editor/forms/ImageEditor.ImageSaveRunnable.html
+$dokka.location:me.mafrans.soloadventure.editor.forms/ItemEditor.ItemSaveRunnable///PointingToDeclaration/me/mafrans/soloadventure/editor/forms/ItemEditor.ItemSaveRunnable.html
+$dokka.location:me.mafrans.soloadventure.editor.forms/RoomEditor.RoomSaveRunnable///PointingToDeclaration/me/mafrans/soloadventure/editor/forms/RoomEditor.RoomSaveRunnable.html
+$dokka.location:me.mafrans.soloadventure/AsciiColor.Companion///PointingToDeclaration/me/mafrans/soloadventure/AsciiColor.Companion.html
+$dokka.location:me.mafrans.soloadventure/Database.Companion///PointingToDeclaration/me/mafrans/soloadventure/Database.Companion.html
+$dokka.location:me.mafrans.soloadventure/Database.Enemies.Companion///PointingToDeclaration/me/mafrans/soloadventure/Database.Enemies.Companion.html
+$dokka.location:me.mafrans.soloadventure/Database.Enemies///PointingToDeclaration/me/mafrans/soloadventure/Database.Enemies.html
+$dokka.location:me.mafrans.soloadventure/Database.Images.Companion///PointingToDeclaration/me/mafrans/soloadventure/Database.Images.Companion.html
+$dokka.location:me.mafrans.soloadventure/Database.Images///PointingToDeclaration/me/mafrans/soloadventure/Database.Images.html
+$dokka.location:me.mafrans.soloadventure/Util.Companion///PointingToDeclaration/me/mafrans/soloadventure/Util.Companion.html
+me.mafrans.soloadventure
+me.mafrans.soloadventure.editor
+me.mafrans.soloadventure.editor.forms
+me.mafrans.soloadventure.editor.jcomponents
+me.mafrans.soloadventure.editor.jskit
+me.mafrans.soloadventure.models
+
