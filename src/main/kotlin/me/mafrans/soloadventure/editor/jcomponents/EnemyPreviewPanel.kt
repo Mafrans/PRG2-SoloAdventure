@@ -1,13 +1,16 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jcomponents
 
+import me.mafrans.soloadventure.editor.forms.EnemyEditor
 import me.mafrans.soloadventure.models.DBEnemy
-import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.GridLayout
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 
+/**
+ * Custom component that displays a preview of a {@link DBEnemy} enemy
+ */
 class EnemyPreviewPanel(var enemy: DBEnemy) : JPanel() {
     var namePanel = JLabel(enemy.name)
     var hpPanel = JLabel(enemy.hp.toString())

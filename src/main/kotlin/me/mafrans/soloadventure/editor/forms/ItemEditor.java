@@ -1,15 +1,12 @@
-package me.mafrans.soloadventure.editor;
+package me.mafrans.soloadventure.editor.forms;
 
+import me.mafrans.soloadventure.AsciiColor;
 import me.mafrans.soloadventure.Util;
-import me.mafrans.soloadventure.models.DBEnemy;
 import me.mafrans.soloadventure.models.DBItem;
 import me.mafrans.soloadventure.models.DBWeapon;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class ItemEditor {

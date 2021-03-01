@@ -1,17 +1,16 @@
-package me.mafrans.soloadventure.editor;
+package me.mafrans.soloadventure.editor.forms;
 
-import me.mafrans.soloadventure.Util;
+import me.mafrans.soloadventure.AsciiColor;
+import me.mafrans.soloadventure.editor.jcomponents.EnemyPreviewPanel;
+import me.mafrans.soloadventure.editor.jcomponents.ImagePreviewPanel;
+import me.mafrans.soloadventure.editor.jcomponents.ItemPreviewPanel;
+import me.mafrans.soloadventure.editor.jskit.JSEditorPane;
 import me.mafrans.soloadventure.models.*;
-import org.bson.types.ObjectId;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RoomEditor {
     private JTabbedPane tabbedPane1;

@@ -1,13 +1,10 @@
-package me.mafrans.soloadventure.editor;
+package me.mafrans.soloadventure.editor.forms;
 
-import me.mafrans.soloadventure.Database;
+import me.mafrans.soloadventure.editor.jcomponents.ImagePreviewPanel;
 import me.mafrans.soloadventure.models.DBEnemy;
-import me.mafrans.soloadventure.models.DBImage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EnemyEditor {
     private JTextField nameField;

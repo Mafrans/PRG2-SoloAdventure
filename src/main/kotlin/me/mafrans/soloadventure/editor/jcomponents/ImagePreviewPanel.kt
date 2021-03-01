@@ -1,11 +1,14 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jcomponents
 
+import me.mafrans.soloadventure.AsciiColor
 import me.mafrans.soloadventure.models.DBImage
 import java.awt.Font
 import java.awt.Graphics
 import javax.swing.JPanel
 
-
+/**
+ * Custom component that renders an {@link DBImage} image
+ */
 class ImagePreviewPanel(var image: DBImage?) : JPanel() {
     override fun paint(g: Graphics?) {
         val image = this.image ?: return;

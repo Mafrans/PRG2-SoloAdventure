@@ -1,8 +1,11 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure
 
 import org.fusesource.jansi.Ansi
 import java.awt.Color
 
+/**
+ * Enum class containing ascii color values, used for matching
+ */
 enum class AsciiColor(val ansiColor: Ansi.Color, val color: Color, val bright: Boolean) {
     WHITE(Ansi.Color.WHITE, Color(255, 255, 255), true),
     GRAY(Ansi.Color.WHITE, Color(128, 128, 128), false),
@@ -21,27 +24,45 @@ enum class AsciiColor(val ansiColor: Ansi.Color, val color: Color, val bright: B
     BLACK(Ansi.Color.BLACK, Color(0, 0, 0), true);
 
     companion object {
+        /**
+         * Finds a corresponding AsciiColor from an {@link Ansi.Color} object
+         */
         fun from(ansiColor: Ansi.Color): AsciiColor? {
             return values().find { it.ansiColor == ansiColor }
         }
 
+        /**
+         * Finds a corresponding AsciiColor from a {@link java.awt.Color} object
+         */
         fun from(color: Color): AsciiColor? {
             return values().find { it.color == color }
         }
 
+        /**
+         * Finds a corresponding AsciiColor from a foreground Ansi color int
+         */
         fun fromFG(ansiColor: Int): AsciiColor? {
             return values().find { it.fg() == ansiColor }
         }
 
+        /**
+         * Finds a corresponding AsciiColor from a background Ansi color int
+         */
         fun fromBG(ansiColor: Int): AsciiColor? {
             return values().find { it.bg() == ansiColor }
         }
     }
 
+    /**
+     * @return The foreground Ansi color
+     */
     fun fg(): Int {
         return if(bright) ansiColor.fgBright() else ansiColor.fg()
     }
 
+    /**
+     * @return The background Ansi color
+     */
     fun bg(): Int {
         return if(bright) ansiColor.bgBright() else ansiColor.bg()
     }

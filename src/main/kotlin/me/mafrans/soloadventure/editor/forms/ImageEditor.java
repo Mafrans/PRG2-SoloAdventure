@@ -1,7 +1,11 @@
-package me.mafrans.soloadventure.editor;
+package me.mafrans.soloadventure.editor.forms;
 
+import me.mafrans.soloadventure.AsciiColor;
+import me.mafrans.soloadventure.editor.jcomponents.AsciiEditorPainter;
+import me.mafrans.soloadventure.editor.jcomponents.AsciiEditorTable;
+import me.mafrans.soloadventure.editor.jcomponents.ColorPickerPanel;
+import me.mafrans.soloadventure.editor.jcomponents.DrawType;
 import me.mafrans.soloadventure.models.DBImage;
-import me.mafrans.soloadventure.models.DBImageCell;
 
 import javax.swing.*;
 

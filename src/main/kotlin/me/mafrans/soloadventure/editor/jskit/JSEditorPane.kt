@@ -1,4 +1,4 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jskit
 
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener

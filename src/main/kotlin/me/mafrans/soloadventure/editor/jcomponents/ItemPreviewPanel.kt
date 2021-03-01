@@ -1,15 +1,15 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jcomponents
 
-import me.mafrans.soloadventure.Database
-import me.mafrans.soloadventure.models.DBEnemy
+import me.mafrans.soloadventure.editor.forms.ItemEditor
 import me.mafrans.soloadventure.models.DBItem
-import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
-import java.awt.GridLayout
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 
+/**
+ * Custom component that previews a {@link DBItem} item
+ */
 class ItemPreviewPanel(var item: DBItem) : JPanel() {
     var namePanel = JLabel()
     var descriptionPanel = JLabel()

@@ -1,11 +1,10 @@
 package me.mafrans.soloadventure.editor;
 
+import me.mafrans.soloadventure.editor.forms.RoomEditor;
 import me.mafrans.soloadventure.models.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.HashMap;
 
 import static me.mafrans.soloadventure.models.DBGame.MAP_HEIGHT;
 import static me.mafrans.soloadventure.models.DBGame.MAP_WIDTH;

@@ -1,5 +1,6 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jcomponents
 
+import me.mafrans.soloadventure.AsciiColor
 import me.mafrans.soloadventure.models.DBColorStyle
 import me.mafrans.soloadventure.models.DBImage
 import me.mafrans.soloadventure.models.DBImageCell
@@ -21,6 +22,9 @@ enum class DrawType {
     BACKGROUND
 }
 
+/**
+ * Custom component that renders and edits foreground and background colors for an ascii image
+ */
 class AsciiEditorPainter(val table: AsciiEditorTable) : JPanel() {
     val colors: Array<Array<CellColor>> = Array(table.columns) { Array(table.rows) { CellColor(null, null) } }
     var currentColor = AsciiColor.WHITE

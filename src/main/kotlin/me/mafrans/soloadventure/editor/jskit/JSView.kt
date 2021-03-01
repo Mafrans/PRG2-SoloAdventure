@@ -1,4 +1,4 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jskit
 
 import java.awt.Color
 import java.awt.Graphics2D

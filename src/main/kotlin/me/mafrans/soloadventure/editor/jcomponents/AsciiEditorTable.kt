@@ -1,9 +1,12 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jcomponents
 
 import me.mafrans.soloadventure.models.DBImage
 import javax.swing.JTable
 import javax.swing.table.DefaultTableModel
 
+/**
+ * Custom component that edits the text of an ascii image
+ */
 class AsciiEditorTable(val columns: Int, val rows: Int) : JTable() {
     init {
         val model = DefaultTableModel()

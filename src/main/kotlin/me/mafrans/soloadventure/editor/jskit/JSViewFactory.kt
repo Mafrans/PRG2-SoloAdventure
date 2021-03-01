@@ -1,4 +1,4 @@
-package me.mafrans.soloadventure.editor
+package me.mafrans.soloadventure.editor.jskit
 
 import javax.swing.text.Element
 import javax.swing.text.View
